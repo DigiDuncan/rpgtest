@@ -2,7 +2,7 @@ from arcade import Camera2D, Vec2, View
 import arcade.key
 
 from rpgtest.objects.collider import Collider
-from rpgtest.objects.interactor import Interactor
+from rpgtest.objects.interactor import Interactor, Woah
 from rpgtest.objects.player import Player
 
 class MainView(View):
@@ -15,7 +15,7 @@ class MainView(View):
             Collider(700, 900, 100, 620)
         ]
         self.interactors: list[Interactor] = [
-            Interactor(Vec2(self.window.center_x - 200, self.window.center_y), 25)
+            Woah(Vec2(self.window.center_x - 200, self.window.center_y), 25)
         ]
 
     def on_key_press(self, symbol: int, modifiers: int):
@@ -31,6 +31,10 @@ class MainView(View):
 
             case arcade.key.GRAVE:
                 self.window.debug = not self.window.debug
+
+            case arcade.key.ENTER:
+                for i in self.interactors:
+                    i.activate()
 
     def on_key_release(self, symbol: int, modifiers: int):
         match symbol:
