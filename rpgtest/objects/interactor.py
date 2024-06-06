@@ -21,13 +21,13 @@ class Interactor:
         draw_cross(self.position, 3, arcade.color.GREEN if self.active else arcade.color.GRAY)
 
     def activate(self):
-        raise NotImplementedError
+        if self.active:
+            self.activated_time = self.window.local_time
 
 
 class Woah(Interactor):
     def activate(self):
-        if self.active:
-            self.activated_time = self.window.local_time
+        return super().activate()
 
     def draw(self):
         if self.activated_time < self.window.local_time < self.activated_time + 1:
